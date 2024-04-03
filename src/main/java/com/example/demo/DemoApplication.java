@@ -25,6 +25,22 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+//		selectPessoas();
+//		insert();
+
+		String sql = "update pessoas set nome = ? where id = ?";
+		jdbcTemplate.update(sql, "Glauber", 6);
+
+
+
+	}
+
+	private void insert() {
+		String sql = "INSERT INTO pessoas (id, nome, idade) VALUES (?, ?, ?)";
+		jdbcTemplate.update(sql, 6, "Glauber", 25);
+	}
+
+	private void selectPessoas() {
 		String sql = "SELECT * FROM PESSOAS";
 
 		RowMapper<Pessoa> rowMapper = ((rs, rowNum) -> new Pessoa(
@@ -38,6 +54,6 @@ public class DemoApplication implements CommandLineRunner {
 		listaPessoas.forEach(p -> {
 			System.out.println(p.getNome());
 		});
-
 	}
+
 }
